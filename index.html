@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blueprint — Websites for local businesses</title>
+<meta name="description" content="Blueprint designs and builds fast, modern websites for the cafés, trades and studios on your high street. Drawn to scale, then built for real.">
+<link rel="icon" href="Logos/blueprint-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Poppins:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="cursor-hidden">
+
+<canvas id="scene"></canvas>
+<div class="parallax-layer deep-bg" data-depth="0"></div>
+<div class="parallax-layer grid-bg" data-depth="0.1"></div>
+<div class="parallax-layer grid-night" data-depth="0.1"></div>
+<div class="draft" data-depth="0.26">
+  <svg class="compass" viewBox="0 0 150 150"><circle class="stroke" cx="75" cy="75" r="60"/><circle class="stroke" cx="75" cy="75" r="44"/><line class="stroke" x1="75" y1="8" x2="75" y2="142"/><line class="stroke" x1="8" y1="75" x2="142" y2="75"/><text class="lbl" x="70" y="20">N</text></svg>
+  <svg class="cross" viewBox="0 0 60 60"><circle class="stroke" cx="30" cy="30" r="10"/><line class="stroke" x1="30" y1="0" x2="30" y2="60"/><line class="stroke" x1="0" y1="30" x2="60" y2="30"/></svg>
+</div>
+<div class="cursor" id="cursor"><div class="ring"></div><div class="h"></div><div class="v"></div><div class="coord" id="coord">X000 Y000</div></div>
+
+<div class="rail">
+  <a href="#build" data-sec="build" class="on">Approach</a><a href="#work" data-sec="work">Work</a><a href="#iso" data-sec="iso">Layers</a><a href="#about" data-sec="about">Studio</a><a href="#contact" data-sec="contact">Contact</a>
+</div>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <img src="Logos/blueprint-mark.svg" alt="" class="brand-icon">
+      <svg class="brand-word brand-word-light" viewBox="1.2 11.7 208 56.7" role="img" aria-label="Blueprint"><text x="4" y="40" dominant-baseline="central" font-family="Century Gothic, 'URW Gothic', Questrial, sans-serif" font-weight="500" font-size="44" letter-spacing="-0.3"><tspan fill="#1f4e9c">Blueprint</tspan><tspan fill="#12356e">.</tspan></text></svg>
+      <svg class="brand-word brand-word-dark" viewBox="1.2 11.7 208 56.7" role="img" aria-label="Blueprint"><text x="4" y="40" dominant-baseline="central" font-family="Century Gothic, 'URW Gothic', Questrial, sans-serif" font-weight="500" font-size="44" letter-spacing="-0.3"><tspan fill="#ffffff">Blueprint</tspan><tspan fill="#8fb4ee">.</tspan></text></svg>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="pricing.html">Inquiries and pricing</a></li>
+      <li><a href="about.html">About us</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta mag">GET IN TOUCH</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="tick reveal" data-float>WEB STUDIO · LOCAL BUSINESSES · SCALE 1:1</span>
+    <h1 class="hero-h" data-scatter>Good sites deserve <span class="emph">careful hands.</span></h1>
+    <p class="lead reveal">I design and build fast, modern websites for the cafés, trades and studios on your high street — drawn to scale, then built for real, by the person who answers your emails.</p>
+    <div class="ctas reveal"><a href="#contact" class="btn btn-primary mag">Start a project →</a><span class="reply">Replies within a day</span></div>
+  </div>
+</header>
+
+<div class="chips">
+  <span class="reveal">SCALE 1:1</span><span class="reveal">BUILT LOCAL</span><span class="reveal">DRAWN TO FIT</span><span class="reveal">NO TEMPLATES</span><span class="reveal">ONE PROJECT AT A TIME</span>
+</div>
+
+<section class="build" id="build">
+  <div class="build-pin">
+    <div class="build-head"><div class="eyebrow reveal">Every project starts as a blueprint</div><h2 class="reveal">Drawn to scale, then built for real.</h2></div>
+    <div class="stagemark" id="stagemark">STAGE 01 — WIREFRAME</div>
+    <div class="stage">
+      <svg class="wire" viewBox="0 0 720 450" preserveAspectRatio="none">
+        <rect x="3" y="3" width="714" height="444" rx="9"/><line x1="3" y1="62" x2="717" y2="62"/>
+        <circle cx="30" cy="32" r="6"/><circle cx="52" cy="32" r="6"/><circle cx="74" cy="32" r="6"/>
+        <rect class="fillable" x="40" y="104" width="300" height="26"/><rect x="40" y="144" width="220" height="14"/><rect x="40" y="168" width="220" height="14"/>
+        <rect class="fillable" x="40" y="204" width="112" height="38" rx="19"/>
+        <rect class="fillable" x="410" y="96" width="270" height="160" rx="6"/><line x1="410" y1="96" x2="680" y2="256"/><line x1="680" y1="96" x2="410" y2="256"/>
+        <rect class="fillable" x="40" y="300" width="200" height="118" rx="6"/><rect class="fillable" x="260" y="300" width="200" height="118" rx="6"/><rect class="fillable" x="480" y="300" width="200" height="118" rx="6"/>
+        <line class="dim" x1="40" y1="432" x2="340" y2="432"/><line class="dim" x1="40" y1="426" x2="40" y2="438"/><line class="dim" x1="340" y1="426" x2="340" y2="438"/>
+      </svg>
+      <div class="dim-readout">W —— MM</div>
+      <div class="built">
+        <div class="bt-nav"><b>Marlowe's</b><span class="sp"></span><i></i><i></i><i></i></div>
+        <div class="bt-hero"><div class="bt-copy"><div class="t"></div><div class="t s"></div><div class="t s"></div><div class="b"></div></div><div class="bt-img"></div></div>
+        <div class="bt-grid"><div></div><div></div><div></div></div>
+      </div>
+      <span class="note" style="left:-4%;top:26%">MENU — FRONT &amp; CENTRE</span>
+      <span class="note" style="right:-4%;top:54%">BOOK — ONE TAP</span>
+    </div>
+  </div>
+</section>
+
+<section class="hwork" id="work">
+  <div class="lead-col"><h2 class="reveal">Recent <span class="emph">concept</span> redesigns</h2><p class="reveal">Scroll — the work slides past like sheets on a drafting table.</p></div>
+  <div class="htrack">
+    <div class="panel g0"><div class="shot"><div class="inner"></div><svg class="frame" viewBox="0 0 400 300" preserveAspectRatio="none"><line x1="20" y1="20" x2="60" y2="20"/><line x1="20" y1="20" x2="20" y2="60"/><line x1="380" y1="280" x2="340" y2="280"/><line x1="380" y1="280" x2="380" y2="240"/></svg><span>Marlowe's Coffee</span></div><div class="kicker">Local café</div><h3>A menu worth showing off.</h3><p>Rebuilt around the menu, warm photography and getting people through the door.</p></div>
+    <div class="panel g1"><div class="shot"><div class="inner"></div><svg class="frame" viewBox="0 0 400 300" preserveAspectRatio="none"><line x1="20" y1="20" x2="60" y2="20"/><line x1="20" y1="20" x2="20" y2="60"/><line x1="380" y1="280" x2="340" y2="280"/><line x1="380" y1="280" x2="380" y2="240"/></svg><span>Hale &amp; Sons</span></div><div class="kicker">Plumber</div><h3>Built for trust.</h3><p>Clear services, real reviews, a callback form that actually gets answered.</p></div>
+    <div class="panel g2"><div class="shot"><div class="inner"></div><svg class="frame" viewBox="0 0 400 300" preserveAspectRatio="none"><line x1="20" y1="20" x2="60" y2="20"/><line x1="20" y1="20" x2="20" y2="60"/><line x1="380" y1="280" x2="340" y2="280"/><line x1="380" y1="280" x2="380" y2="240"/></svg><span>Form Studio</span></div><div class="kicker">Gym</div><h3>Booking in two taps.</h3><p>Rebuilt around the class timetable, the instructors, and a flow that doesn't lose people.</p></div>
+    <div class="panel g3"><div class="shot"><div class="inner"></div><svg class="frame" viewBox="0 0 400 300" preserveAspectRatio="none"><line x1="20" y1="20" x2="60" y2="20"/><line x1="20" y1="20" x2="20" y2="60"/><line x1="380" y1="280" x2="340" y2="280"/><line x1="380" y1="280" x2="380" y2="240"/></svg><span>Fern &amp; Fable</span></div><div class="kicker">Florist</div><h3>Colour, front and centre.</h3><p>A florist whose photography deserved a site that finally showed it off.</p></div>
+    <div class="panel g4"><div class="shot"><div class="inner"></div><svg class="frame" viewBox="0 0 400 300" preserveAspectRatio="none"><line x1="20" y1="20" x2="60" y2="20"/><line x1="20" y1="20" x2="20" y2="60"/><line x1="380" y1="280" x2="340" y2="280"/><line x1="380" y1="280" x2="380" y2="240"/></svg><span>Sharp &amp; Co.</span></div><div class="kicker">Barber</div><h3>Book the chair.</h3><p>A barber shop with a booking button you can actually find on your phone.</p></div>
+    <div class="panel g5"><div class="shot"><div class="inner"></div><svg class="frame" viewBox="0 0 400 300" preserveAspectRatio="none"><line x1="20" y1="20" x2="60" y2="20"/><line x1="20" y1="20" x2="20" y2="60"/><line x1="380" y1="280" x2="340" y2="280"/><line x1="380" y1="280" x2="380" y2="240"/></svg><span>Bridge St. Dental</span></div><div class="kicker">Dentist</div><h3>Calm, clear, trusted.</h3><p>A practice site that reassures first-time patients and makes booking simple.</p></div>
+    <div class="panel g6"><div class="shot"><div class="inner"></div><svg class="frame" viewBox="0 0 400 300" preserveAspectRatio="none"><line x1="20" y1="20" x2="60" y2="20"/><line x1="20" y1="20" x2="20" y2="60"/><line x1="380" y1="280" x2="340" y2="280"/><line x1="380" y1="280" x2="380" y2="240"/></svg><span>The Proving Room</span></div><div class="kicker">Bakery</div><h3>Warm, and hungry-making.</h3><p>A bakery site that makes you want to walk in before the loaves sell out.</p></div>
+    <div class="panel g7"><div class="shot"><div class="inner"></div><svg class="frame" viewBox="0 0 400 300" preserveAspectRatio="none"><line x1="20" y1="20" x2="60" y2="20"/><line x1="20" y1="20" x2="20" y2="60"/><line x1="380" y1="280" x2="340" y2="280"/><line x1="380" y1="280" x2="380" y2="240"/></svg><span>Ledger &amp; Vine</span></div><div class="kicker">Accountant</div><h3>Approachable expertise.</h3><p>An accountancy site that feels human, with a clear path to a first call.</p></div>
+  </div>
+</section>
+
+<div class="deep">
+  <section class="iso" id="iso">
+    <div class="wrap">
+      <div class="eyebrow reveal">How it comes together</div>
+      <h2 class="reveal">Every layer, <span class="emph">considered</span>.</h2>
+      <div class="stack3d-scene">
+        <div class="stack3d" id="stack3d">
+          <div class="plate p1"><div class="pl-grid"></div><span class="pl-tag">01 · CONSULTATION</span></div>
+          <div class="plate p2"><div class="pl-frame"></div><div class="pl-corner"></div><div class="pl-corner br"></div><span class="pl-tag">02 · DESIGN</span></div>
+          <div class="plate p3"><div class="pl-b">B</div><span class="pl-tag">03 · LAUNCH</span></div>
+        </div>
+      </div>
+      <div class="iso-cap"><div class="reveal"><div class="n">01</div><h4>Consultation</h4><p>A short conversation about your business, your customers, and what the site actually needs to do.</p></div><div class="reveal"><div class="n">02</div><h4>Design</h4><p>Type, colour and motion layered on with restraint.</p></div><div class="reveal"><div class="n">03</div><h4>Launch</h4><p>Live on your domain, with a simple handover so you're in control from day one.</p></div></div>
+    </div>
+  </section>
+  <section class="about" id="about">
+    <div class="wrap"><div class="mark reveal">B.</div><h2 class="reveal">One person, <span class="emph">one project</span> at a time.</h2><p class="reveal">Blueprint is a one-person studio, which means the person who designs your site is the same person who answers your emails.</p><p class="reveal">I work with one or two local businesses at a time, so nothing gets rushed and nothing gets handed off.</p></div>
+  </section>
+  <section class="contact" id="contact">
+    <div class="wrap"><div class="eyebrow reveal">Get in touch</div><h2 class="reveal">Let's build <span class="emph">something</span>.</h2><a href="mailto:hello@blueprint.studio" class="mail reveal">hello@blueprint.studio</a></div>
+  </section>
+  <footer><div class="wrap"><span>Blueprint. — websites for local businesses</span><span>hello@blueprint.studio · © 2026</span></div></footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

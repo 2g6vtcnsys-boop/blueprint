@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Blueprint</title>
+<meta name="description" content="Concept redesigns for the cafés, trades and studios on your high street — a look at the kind of thinking a Blueprint project gets.">
+<link rel="icon" href="Logos/blueprint-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Poppins:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="cursor-hidden quiet">
+
+<canvas id="scene"></canvas>
+<div class="parallax-layer deep-bg" data-depth="0"></div>
+<div class="parallax-layer grid-bg" data-depth="0.1"></div>
+<div class="parallax-layer grid-night" data-depth="0.1"></div>
+<div class="draft" data-depth="0.26">
+  <svg class="compass" viewBox="0 0 150 150"><circle class="stroke" cx="75" cy="75" r="60"/><circle class="stroke" cx="75" cy="75" r="44"/><line class="stroke" x1="75" y1="8" x2="75" y2="142"/><line class="stroke" x1="8" y1="75" x2="142" y2="75"/><text class="lbl" x="70" y="20">N</text></svg>
+  <svg class="cross" viewBox="0 0 60 60"><circle class="stroke" cx="30" cy="30" r="10"/><line class="stroke" x1="30" y1="0" x2="30" y2="60"/><line class="stroke" x1="0" y1="30" x2="60" y2="30"/></svg>
+</div>
+<div class="cursor" id="cursor"><div class="ring"></div><div class="h"></div><div class="v"></div><div class="coord" id="coord">X000 Y000</div></div>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <img src="Logos/blueprint-mark.svg" alt="" class="brand-icon">
+      <svg class="brand-word brand-word-light" viewBox="1.2 11.7 208 56.7" role="img" aria-label="Blueprint"><text x="4" y="40" dominant-baseline="central" font-family="Century Gothic, 'URW Gothic', Questrial, sans-serif" font-weight="500" font-size="44" letter-spacing="-0.3"><tspan fill="#1f4e9c">Blueprint</tspan><tspan fill="#12356e">.</tspan></text></svg>
+      <svg class="brand-word brand-word-dark" viewBox="1.2 11.7 208 56.7" role="img" aria-label="Blueprint"><text x="4" y="40" dominant-baseline="central" font-family="Century Gothic, 'URW Gothic', Questrial, sans-serif" font-weight="500" font-size="44" letter-spacing="-0.3"><tspan fill="#ffffff">Blueprint</tspan><tspan fill="#8fb4ee">.</tspan></text></svg>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="portfolio.html" class="active">Portfolio</a></li>
+      <li><a href="pricing.html">Inquiries and pricing</a></li>
+      <li><a href="about.html">About us</a></li>
+    </ul>
+    <a href="pricing.html#inquire" class="nav-cta mag">GET IN TOUCH</a>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow reveal">PORTFOLIO</div>
+    <h1 class="page-h reveal">A few blueprints, <span class="emph">refined.</span></h1>
+    <p class="lead reveal">These are concept redesigns, built to show range — not commissioned client work. Yet. Each one starts from a real kind of local business and asks: what's actually getting in the way of customers right now?</p>
+  </div>
+</header>
+
+<section class="portfolio-grid">
+  <div class="wrap">
+    <div class="pf-grid">
+
+      <div class="pf-card reveal">
+        <div class="pf-thumb g0">
+          <svg class="frame" viewBox="0 0 400 300" preserveAspectRatio="none"><line x1="20" y1="20" x2="60" y2="20"/><line x1="20" y1="20" x2="20" y2="60"/><line x1="380" y1="280" x2="340" y2="280"/><line x1="380" y1="280" x2="380" y2="240"/></svg>
+          <div class="pf-tags"><span>MENU — FRONT &amp; CENTRE</span><span>DIRECTIONS — ONE TAP</span></div>
+        </div>
+        <div class="kicker">LOCAL CAFÉ</div>
+        <h3>Marlowe's Coffee</h3>
+        <p>A neighbourhood café whose site hadn't changed since 2014. Redesigned around the menu, real photos, and getting people through the door.</p>
+      </div>
+
+      <div class="pf-card reveal">
+        <div class="pf-thumb g1">
+          <svg class="frame" viewBox="0 0 400 300" preserveAspectRatio="none"><line x1="20" y1="20" x2="60" y2="20"/><line x1="20" y1="20" x2="20" y2="60"/><line x1="380" y1="280" x2="340" y2="280"/><line x1="380" y1="280" x2="380" y2="240"/></svg>
+          <div class="pf-tags"><span>SERVICES — CLEARLY LISTED</span><span>CALLBACK FORM — SIMPLE</span></div>
+        </div>
+        <div class="kicker">TRADES</div>
+        <h3>Hale &amp; Sons Plumbing</h3>
+        <p>A family plumbing business buried in a directory-site template. Redesigned for trust: clear services, real reviews, a callback form that gets answered.</p>
+      </div>
+
+      <div class="pf-card reveal">
+        <div class="pf-thumb g2">
+          <svg class="frame" viewBox="0 0 400 300" preserveAspectRatio="none"><line x1="20" y1="20" x2="60" y2="20"/><line x1="20" y1="20" x2="20" y2="60"/><line x1="380" y1="280" x2="340" y2="280"/><line x1="380" y1="280" x2="380" y2="240"/></svg>
+          <div class="pf-tags"><span>TIMETABLE — UP FRONT</span><span>BOOKING — TWO TAPS</span></div>
+        </div>
+        <div class="kicker">BOUTIQUE FITNESS</div>
+        <h3>Form Studio</h3>
+        <p>A boutique gym competing with chains that all look the same. Redesigned around the class timetable, instructors, and a booking flow that doesn't lose people.</p>
+      </div>
+
+      <div class="pf-card reveal">
+        <div class="pf-thumb g3">
+          <svg class="frame" viewBox="0 0 400 300" preserveAspectRatio="none"><line x1="20" y1="20" x2="60" y2="20"/><line x1="20" y1="20" x2="20" y2="60"/><line x1="380" y1="280" x2="340" y2="280"/><line x1="380" y1="280" x2="380" y2="240"/></svg>
+          <div class="pf-tags"><span>SEASONAL ARRANGEMENTS — UP FRONT</span><span>ORDER FORM — NO DMS NEEDED</span></div>
+        </div>
+        <div class="kicker">INDEPENDENT RETAIL</div>
+        <h3>Thistle &amp; Bloom</h3>
+        <p>A florist relying entirely on Instagram for sales. Redesigned with a proper shop window: seasonal arrangements, local delivery areas, and an order form that doesn't need a DM.</p>
+      </div>
+
+      <div class="pf-card reveal">
+        <div class="pf-thumb g4">
+          <svg class="frame" viewBox="0 0 400 300" preserveAspectRatio="none"><line x1="20" y1="20" x2="60" y2="20"/><line x1="20" y1="20" x2="20" y2="60"/><line x1="380" y1="280" x2="340" y2="280"/><line x1="380" y1="280" x2="380" y2="240"/></svg>
+          <div class="pf-tags"><span>BOOKING — ONLINE, ANY TIME</span><span>TREATMENTS — PLAIN ENGLISH</span></div>
+        </div>
+        <div class="kicker">HEALTHCARE</div>
+        <h3>Riverside Dental</h3>
+        <p>A dental practice whose booking process meant calling during work hours. Redesigned around online booking, a plain-English treatment list, and the trust signals new patients look for.</p>
+      </div>
+
+      <div class="pf-card reveal">
+        <div class="pf-thumb g5">
+          <svg class="frame" viewBox="0 0 400 300" preserveAspectRatio="none"><line x1="20" y1="20" x2="60" y2="20"/><line x1="20" y1="20" x2="20" y2="60"/><line x1="380" y1="280" x2="340" y2="280"/><line x1="380" y1="280" x2="380" y2="240"/></svg>
+          <div class="pf-tags"><span>STYLISTS — REAL PROFILES</span><span>WALK-IN OR BOOK — CLEAR SPLIT</span></div>
+        </div>
+        <div class="kicker">PERSONAL CARE</div>
+        <h3>Forge &amp; Co.</h3>
+        <p>A barbershop with a single Facebook page and no way to tell who's free. Redesigned around real stylist profiles, a walk-in/booking split, and a gallery that's actually theirs.</p>
+      </div>
+
+    </div>
+
+    <p class="note-line reveal">Want to see what your own site could look like? I'll mock up a free concept redesign of your homepage before you commit to anything.</p>
+  </div>
+</section>
+
+<section class="page-cta">
+  <div class="wrap">
+    <h2 class="reveal">See something close to your business?</h2>
+    <p class="reveal">That's the idea — every redesign here started as a free concept mockup before anything was agreed. Yours can too.</p>
+    <div class="ctas reveal">
+      <a href="pricing.html#inquire" class="btn btn-primary mag">Start an inquiry →</a>
+      <a href="about.html" class="btn btn-ghost mag">Meet the person behind it</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Blueprint. — websites for local businesses</span><span>hello@blueprint.studio · © 2026</span></div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

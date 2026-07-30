@@ -432,8 +432,21 @@ if (reduce){
     });
   }
 
-  /* ---- sticky nav condense ---- */
-  ScrollTrigger.create({ start: 40, onToggle: s => { const nav = document.querySelector('.nav'); if (nav) nav.classList.toggle('solid', s.isActive); } });
+}
+
+/* ---- sticky nav condense ----
+   Deliberately a plain scroll listener rather than a ScrollTrigger. A trigger's
+   active range is [start, end) — exclusive of the end — and with no end supplied
+   GSAP defaults it to maximum scroll, so the frosted panel dropped out at exactly
+   the bottom of the page: the moment you stop scrolling to read the last block,
+   which is when you need it most. Living outside the reduced-motion branch also
+   means the header is legible with Reduce Motion on, which it previously wasn't. */
+const nav = document.querySelector('.nav');
+if (nav){
+  const syncNav = () => nav.classList.toggle('solid', (window.scrollY || document.documentElement.scrollTop) > 40);
+  syncNav();
+  addEventListener('scroll', syncNav, { passive: true });
+  addEventListener('resize', syncNav);
 }
 
 /* ---- magnetic buttons ---- */

@@ -140,7 +140,11 @@
       </div>
     </div>
 
-    <form id="contactForm" class="reveal">
+    <form id="contactForm" class="reveal" action="https://formspree.io/f/mykrazwn" method="POST">
+      <input type="hidden" name="_subject" value="New inquiry from blueprintwebsitedesign.co.uk">
+      <!-- Spam trap. Bots fill every field they find; people never see this one.
+           Positioned off-screen rather than display:none, which bots skip. -->
+      <input type="text" name="_gotcha" class="gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="form-row">
         <div>
           <label for="name">Your name</label>
@@ -170,7 +174,7 @@
       </div>
       <button type="submit" class="btn btn-primary submit-btn mag">Send inquiry</button>
     </form>
-    <p class="form-success mono" id="formSuccess">Thanks — inquiry received. I'll get back to you within a day or two.</p>
+    <p class="form-status mono" id="formStatus" role="status" aria-live="polite"></p>
   </div>
 </section>
 

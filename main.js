@@ -217,15 +217,47 @@ if (!reduce && window.Lenis){
   gsap.ticker.lagSmoothing(0);
 }
 
-/* ---- demo inquiry form: no backend yet, just confirm receipt in-page ---- */
+/* ---- inquiry form -> Formspree ----
+   Posts with fetch so the visitor stays on the page and keeps our own
+   confirmation styling. The rule this replaces an earlier version for:
+   only ever claim success on a real 2xx. The previous handler showed
+   "inquiry received" unconditionally, which meant a prospect could be
+   told they'd reached us when nothing had been sent anywhere. ---- */
 (function initContactForm(){
   const form = document.getElementById('contactForm');
   if (!form) return;
-  const success = document.getElementById('formSuccess');
-  form.addEventListener('submit', e => {
+  const status = document.getElementById('formStatus');
+  const btn = form.querySelector('button[type="submit"]');
+  const btnLabel = btn ? btn.textContent : '';
+
+  const say = (msg, kind) => {
+    if (!status) return;
+    status.textContent = msg;
+    status.classList.remove('ok', 'err');
+    status.classList.add('show', kind);
+  };
+
+  form.addEventListener('submit', async e => {
     e.preventDefault();
-    form.style.display = 'none';
-    if (success) success.classList.add('show');
+    if (btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
+    if (status) status.classList.remove('show', 'ok', 'err');
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }   // else Formspree redirects away
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      form.style.display = 'none';
+      say("Thanks — inquiry received. I'll get back to you within a day or two.", 'ok');
+    } catch (err) {
+      // Leave the form filled in so nothing they typed is lost, and point at
+      // a route that doesn't depend on this request working.
+      console.error('[inquiry form]', err);
+      if (btn){ btn.disabled = false; btn.textContent = btnLabel; }
+      say("That didn't send. Please email hello@blueprint.studio instead, or try again in a moment.", 'err');
+    }
   });
 })();
 

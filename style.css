@@ -270,8 +270,12 @@ form textarea{min-height:120px;resize:vertical}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 form>div{margin-bottom:18px}
 .submit-btn{border:none;cursor:pointer;font-family:inherit}
-.form-success{display:none;margin-top:16px;color:var(--blue-dk);font-size:13px}
-.form-success.show{display:block}
+.form-status{display:none;margin-top:16px;font-size:13px;line-height:1.55;max-width:54ch}
+.form-status.show{display:block}
+.form-status.ok{color:var(--blue-dk)}
+.form-status.err{color:#a3341f}   /* 6.1:1 on the page background — measured */
+/* off-screen, not display:none: bots skip hidden fields but fill this one */
+.gotcha{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
 
 /* ---- about bio ---- */
 .bio{padding:20px 0 90px;position:relative}

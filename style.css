@@ -128,18 +128,11 @@ body.night .dim-readout{color:#9CC4FF}
 .hwork .lead-col h2{font-size:clamp(28px,3.6vw,48px)}.hwork .lead-col p{color:var(--ink-soft);margin-top:12px}
 .htrack{display:flex;height:100%;align-items:center;gap:36px;padding:0 40px 0 clamp(40px,34vw,520px);will-change:transform}
 .panel{flex:0 0 min(400px,78vw)}
-.panel .shot{border:1px solid var(--line);border-radius:12px;overflow:hidden;aspect-ratio:4/3.2;position:relative;box-shadow:0 40px 80px -44px rgba(15,46,87,.45)}
-.panel .shot .inner{position:absolute;inset:0;background-size:cover}
-.panel.g0 .inner{background:linear-gradient(135deg,#4E86D6,#1E4E96)}
-.panel.g1 .inner{background:linear-gradient(135deg,#2F6BBF,#0F2E57)}
-.panel.g2 .inner{background:linear-gradient(135deg,#5FA0D8,#2A5C9E)}
-.panel.g3 .inner{background:linear-gradient(135deg,#6E9BD8,#324E86)}
-.panel.g4 .inner{background:linear-gradient(135deg,#3E7BD6,#123c68)}
-.panel.g5 .inner{background:linear-gradient(135deg,#89B2E4,#3a63a8)}
-.panel.g6 .inner{background:linear-gradient(135deg,#5A86C8,#22406f)}
-.panel.g7 .inner{background:linear-gradient(135deg,#7FA8E6,#2F6BBF)}
+.panel .shot{border:1px solid var(--line);border-radius:12px;overflow:hidden;aspect-ratio:4/3.2;position:relative;box-shadow:0 40px 80px -44px rgba(15,46,87,.45);background:var(--pale)}
 .panel .shot .frame{position:absolute;inset:0;z-index:2}.panel .shot .frame line{stroke:rgba(255,255,255,.6);stroke-width:1}
-.panel .shot span{position:absolute;left:16px;bottom:14px;z-index:3;font-family:'Fraunces';font-style:italic;color:#fff;font-size:18px}
+/* The name sits on the screenshot, so it needs its own scrim — several of
+   these mockups are pale at the bottom edge and white-on-white vanished. */
+.panel .shot span{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:34px 16px 13px;font-family:'Fraunces';font-style:italic;color:#fff;font-size:18px;background:linear-gradient(to top,rgba(9,28,54,.82),rgba(9,28,54,.5) 46%,transparent)}
 .panel .kicker{font-family:'IBM Plex Mono';color:var(--blue-dk);font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-top:20px}
 .panel h3{font-size:22px;font-weight:700;letter-spacing:-.02em;margin:8px 0 8px}.panel p{color:var(--ink-soft);font-size:15px}
 
@@ -212,21 +205,42 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
 /* ---- portfolio grid ---- */
 .portfolio-grid{padding:20px 0 100px;position:relative}
-.pf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 28px;margin-top:20px}
+/* Two columns, not three: there are four concepts, and a 3-wide grid leaves a
+   single orphan on the second row. Bigger tiles also do more justice to a real
+   screenshot than the gradient placeholders needed. */
+.pf-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:52px 34px;margin-top:20px}
 .pf-card{display:block}
-.pf-thumb{position:relative;border:1px solid var(--line);border-radius:12px;overflow:hidden;aspect-ratio:4/3.1;box-shadow:0 30px 60px -36px rgba(15,46,87,.4)}
-.pf-thumb.g0{background:linear-gradient(135deg,#4E86D6,#1E4E96)}
-.pf-thumb.g1{background:linear-gradient(135deg,#2F6BBF,#0F2E57)}
-.pf-thumb.g2{background:linear-gradient(135deg,#5FA0D8,#2A5C9E)}
-.pf-thumb.g3{background:linear-gradient(135deg,#6E9BD8,#324E86)}
-.pf-thumb.g4{background:linear-gradient(135deg,#3E7BD6,#123c68)}
-.pf-thumb.g5{background:linear-gradient(135deg,#89B2E4,#3a63a8)}
+.pf-thumb{position:relative;border:1px solid var(--line);border-radius:12px;overflow:hidden;aspect-ratio:4/3.1;box-shadow:0 30px 60px -36px rgba(15,46,87,.4);background:var(--pale)}
 .pf-thumb .frame{position:absolute;inset:0;z-index:2}.pf-thumb .frame line{stroke:rgba(255,255,255,.6);stroke-width:1}
 .pf-tags{position:absolute;left:14px;right:14px;bottom:14px;display:flex;flex-wrap:wrap;gap:6px;z-index:3}
-.pf-tags span{font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:.06em;color:#fff;background:rgba(11,37,69,.55);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);padding:4px 9px;border-radius:100px}
+/* .72, not .55: these pills used to sit on dark blue gradients, where .55 was
+   plenty. They now sit on real screenshots — Mercer's is a white drawing sheet,
+   where .55 measured 3.66:1 against white 10.5px text. .72 gives 6.25:1 over
+   white and only gets darker over the dark mockups. */
+.pf-tags span{font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:.06em;color:#fff;background:rgba(11,37,69,.72);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);padding:4px 9px;border-radius:100px}
 .pf-card .kicker{font-family:'IBM Plex Mono';color:var(--blue-dk);font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-top:18px}
 .pf-card h3{font-size:21px;font-weight:700;letter-spacing:-.02em;margin:6px 0 6px}
 .pf-card p{color:var(--ink-soft);font-size:15px}
+
+/* ---- concept cards that open the real build ----
+   The thumbnail is a screenshot of the mockup itself, so the card promises
+   exactly what the click delivers. Cards are <a>, not a div with a nested
+   link, so the whole tile is one target for a mouse, a thumb and a tab stop. */
+.pf-thumb img,.panel .shot img{position:absolute;inset:0;z-index:1;display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
+a.pf-card,a.panel{color:inherit;text-decoration:none;border-radius:14px}
+a.pf-card .pf-thumb,a.panel .shot{transition:transform .5s cubic-bezier(.22,.7,.28,1),box-shadow .5s cubic-bezier(.22,.7,.28,1)}
+a.pf-card:hover .pf-thumb{transform:translateY(-5px);box-shadow:0 42px 70px -34px rgba(15,46,87,.58)}
+a.panel:hover .shot{transform:translateY(-5px);box-shadow:0 52px 90px -42px rgba(15,46,87,.6)}
+a.pf-card:focus-visible,a.panel:focus-visible{outline:2px solid var(--blue);outline-offset:6px}
+.pf-open{display:inline-block;margin-top:12px;font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.08em;color:var(--blue-dk)}
+.pf-open .arw{display:inline-block;transition:transform .45s cubic-bezier(.22,.7,.28,1)}
+a.pf-card:hover .pf-open .arw,a.panel:hover .pf-open .arw{transform:translateX(5px)}
+@media (prefers-reduced-motion:reduce){
+  a.pf-card .pf-thumb,a.panel .shot,.pf-open .arw{transition:none}
+  a.pf-card:hover .pf-thumb,a.panel:hover .shot{transform:none}
+  a.pf-card:hover .pf-open .arw,a.panel:hover .pf-open .arw{transform:none}
+  a.pf-card:hover .pf-open,a.panel:hover .pf-open{text-decoration:underline}
+}
 
 /* ---- pricing tiers ---- */
 .pricing{padding:20px 0 100px;position:relative}

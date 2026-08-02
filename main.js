@@ -390,14 +390,25 @@ if (reduce){
       .to('.built', { opacity: 1, duration: .7, ease: 'power2.out' }, 3.4);
   }
 
-  /* ---- horizontal showcase: pinned section scrolls concept cards sideways ---- */
+  /* ---- horizontal showcase: pinned section scrolls concept cards sideways ----
+     Only pin when there is genuinely something off-screen to travel to. The
+     track holds four real concepts now rather than eight placeholders, so on a
+     wide monitor it can fit entirely in view — and pinning the section for the
+     45px that remained just froze the page for a moment and let go, which reads
+     as a scroll bug rather than a device. Below the threshold every card is
+     visible anyway, so the section is left alone. A null hworkTween is already
+     an expected state: the mobile branch does the same, and the camera walk
+     below falls back to buildEnd when it is missing. */
+  const HPIN_MIN = 140;
   if (document.querySelector('.hwork') && (fine || innerWidth > 900)){
     const track = document.querySelector('.htrack');
     const dist = () => Math.max(0, track.scrollWidth - innerWidth + 60);
-    hworkTween = gsap.to(track, {
-      x: () => -dist(), ease: 'none',
-      scrollTrigger: { trigger: '.hwork', start: 'top top', end: () => '+=' + dist(), pin: true, scrub: .7, invalidateOnRefresh: true }
-    });
+    if (dist() > HPIN_MIN){
+      hworkTween = gsap.to(track, {
+        x: () => -dist(), ease: 'none',
+        scrollTrigger: { trigger: '.hwork', start: 'top top', end: () => '+=' + dist(), pin: true, scrub: .7, invalidateOnRefresh: true }
+      });
+    }
   }
 
   /* ---- camera walk: one global scroll tracker (kept separate from the build/

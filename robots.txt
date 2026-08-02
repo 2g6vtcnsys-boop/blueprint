@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# The concept mockups are demonstrations built around invented businesses.
+# They are deliberately kept out of search so that pages carrying fictional
+# trading names, registration numbers and phone numbers are never returned as
+# if they were real firms. Each one also carries its own noindex tag.
+Disallow: /work/
+
+Sitemap: https://blueprintwebsitedesign.co.uk/sitemap.xml

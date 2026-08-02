@@ -256,7 +256,7 @@ if (!reduce && window.Lenis){
       // a route that doesn't depend on this request working.
       console.error('[inquiry form]', err);
       if (btn){ btn.disabled = false; btn.textContent = btnLabel; }
-      say("That didn't send. Please email hello@blueprint.studio instead, or try again in a moment.", 'err');
+      say("That didn't send. Please email dougbridge8@gmail.com instead, or try again in a moment.", 'err');
     }
   });
 })();

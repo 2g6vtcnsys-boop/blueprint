@@ -89,9 +89,27 @@ h1.hero-h{font-size:clamp(46px,7.2vw,100px);max-width:15ch}
 .ctas{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:9px;font-size:16px;font-weight:600;padding:16px 30px;border-radius:100px;transition:background .22s;will-change:transform}
 .btn-primary{background:var(--ink);color:var(--paper)}.btn-primary:hover{background:var(--blue-dk)}
+/* The dark fill is a dark shape on a dark ground once night is on — measured
+   1.01:1 against the page, so the label floated with no button under it even
+   though the label itself was 12:1. Inverted for night: light pill, dark label,
+   11.47:1 both for the shape and the text on it. */
+body.night .btn-primary{background:var(--pale-2);color:var(--deep)}
+body.night .btn-primary:hover{background:#fff}
 .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}.btn-ghost:hover{background:var(--ink);color:var(--paper)}
 .reply{font-family:'IBM Plex Mono';font-size:13px;color:var(--ink-soft);display:inline-flex;align-items:center;gap:8px}
 .reply::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--blue)}
+/* Night-mode hero. Normally the hero has scrolled away before the night
+   crossfade runs, so these never applied — but reduced-motion switches to night
+   at load, which left those visitors reading the hero in light-mode ink on the
+   dark ground: heading 1.13:1, italic 2.91:1, lead and reply 3.06:1, and the
+   tick 1.92:1 on its own translucent pill. Every colour below is one night mode
+   already uses (--pale-2 on nav, #9CC4FF on .deep .emph, #A6BDDC on .deep p,
+   and the .chips span treatment for the pill), so this adds no new accent.
+   Measured after: 11.47 / 8.61 / 8.01 / 8.61:1. */
+body.night .hero-h{color:var(--pale-2)}
+body.night .hero-h .char.em{color:#9CC4FF}
+body.night .hero .lead,body.night .hero .reply{color:#A6BDDC}
+body.night .hero .tick{color:#9CC4FF;border-color:#2a5a96;background:rgba(11,37,69,.9)}
 
 /* ---- static spec chips (90% opaque, no scroll animation) ---- */
 .chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:6px 40px 70px;position:relative;z-index:2}

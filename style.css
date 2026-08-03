@@ -189,6 +189,19 @@ body.night .dim-readout{color:#9CC4FF}
 
 footer{padding:34px 0 46px;color:#7f9bc0;font-family:'IBM Plex Mono';font-size:13px;position:relative;z-index:2}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+footer a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+footer a:hover{color:var(--blue)}
+body.night footer a:hover{color:#9CC4FF}
+
+/* ---- privacy policy ---- */
+.policy{padding:10px 0 90px;position:relative}
+.policy-block{margin-bottom:44px;max-width:68ch}
+.policy-block h2{font-size:clamp(21px,2.4vw,27px);letter-spacing:-.02em;margin-bottom:12px}
+.policy-block p{color:var(--ink-soft);margin-bottom:12px}
+.policy-block p b{color:var(--ink)}
+.policy-block ul{color:var(--ink-soft);margin:0 0 12px;padding-left:22px}
+.policy-block li{margin-bottom:7px}
+.policy-block a{color:var(--blue-dk);text-decoration:underline;text-underline-offset:2px}
 
 /* ---- scroll-reveal base state ---- */
 /* Reveals hide ONLY once JS has proved it is running. The `js` class is set by

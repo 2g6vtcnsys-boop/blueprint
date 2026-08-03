@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>/* Reveal guard — must stay inline and in <head>. Adds `js` before first paint so
+   .js .reveal can hide without ever flashing visible content, and removes it again
+   if main.js never confirms it ran (GSAP CDN blocked, script error), so a failed
+   dependency degrades to a plain visible page instead of a blank one. main.js
+   clears this timer on success, so a slow connection never loses the animation. */
+(function(){var d=document.documentElement;d.classList.add('js');
+window.__revealGuard=setTimeout(function(){d.classList.remove('js');},3000);})();</script>
+
+<title>Privacy — Blueprint website design</title>
+<meta name="description" content="What Blueprint collects, why, and for how long. No cookies, no tracking across sites, and no consent pop-up needed.">
+<link rel="canonical" href="https://blueprintwebsitedesign.co.uk/privacy.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Blueprint">
+<meta property="og:url" content="https://blueprintwebsitedesign.co.uk/privacy.html">
+<meta property="og:title" content="Privacy — Blueprint website design">
+<meta property="og:description" content="What Blueprint collects, why, and for how long. No cookies, no tracking across sites, and no consent pop-up needed.">
+<meta property="og:image" content="https://blueprintwebsitedesign.co.uk/Logos/og-share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="Logos/blueprint-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Poppins:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="cursor-hidden quiet">
+
+<canvas id="scene"></canvas>
+<div class="parallax-layer deep-bg" data-depth="0"></div>
+<div class="parallax-layer grid-bg" data-depth="0.1"></div>
+<div class="parallax-layer grid-night" data-depth="0.1"></div>
+<div class="draft" data-depth="0.26">
+  <svg class="compass" viewBox="0 0 150 150"><circle class="stroke" cx="75" cy="75" r="60"/><circle class="stroke" cx="75" cy="75" r="44"/><line class="stroke" x1="75" y1="8" x2="75" y2="142"/><line class="stroke" x1="8" y1="75" x2="142" y2="75"/><text class="lbl" x="70" y="20">N</text></svg>
+  <svg class="cross" viewBox="0 0 60 60"><circle class="stroke" cx="30" cy="30" r="10"/><line class="stroke" x1="30" y1="0" x2="30" y2="60"/><line class="stroke" x1="0" y1="30" x2="60" y2="30"/></svg>
+</div>
+<div class="cursor" id="cursor"><div class="ring"></div><div class="h"></div><div class="v"></div><div class="coord" id="coord">X000 Y000</div></div>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <img src="Logos/blueprint-mark.svg" alt="" class="brand-icon">
+      <svg class="brand-word brand-word-light" viewBox="1.2 11.7 208 56.7" role="img" aria-label="Blueprint"><text x="4" y="40" dominant-baseline="central" font-family="Century Gothic, 'URW Gothic', Questrial, sans-serif" font-weight="500" font-size="44" letter-spacing="-0.3"><tspan fill="#1f4e9c">Blueprint</tspan><tspan fill="#12356e">.</tspan></text></svg>
+      <svg class="brand-word brand-word-dark" viewBox="1.2 11.7 208 56.7" role="img" aria-label="Blueprint"><text x="4" y="40" dominant-baseline="central" font-family="Century Gothic, 'URW Gothic', Questrial, sans-serif" font-weight="500" font-size="44" letter-spacing="-0.3"><tspan fill="#ffffff">Blueprint</tspan><tspan fill="#8fb4ee">.</tspan></text></svg>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="pricing.html">Inquiries and pricing</a></li>
+      <li><a href="about.html">About us</a></li>
+    </ul>
+    <a href="pricing.html#inquire" class="nav-cta mag">GET IN TOUCH</a>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow reveal">PRIVACY</div>
+    <h1 class="page-h reveal">No cookies, <span class="emph">no pop-up.</span></h1>
+    <p class="lead reveal">This site counts visits without putting anything on your device and without following you anywhere else. That is why you have not been asked to accept anything.</p>
+  </div>
+</header>
+
+<section class="policy">
+  <div class="wrap">
+
+    <div class="policy-block reveal">
+      <h2>Who is responsible</h2>
+      <p>Blueprint is a one-person web studio run by David Bridge in London. If you have any question about this page, or want anything removed, email <a href="mailto:dougbridge8@gmail.com">dougbridge8@gmail.com</a> and you will get a reply from the person who wrote it.</p>
+    </div>
+
+    <div class="policy-block reveal">
+      <h2>What is measured when you read this site</h2>
+      <p>Blueprint uses its own visitor-counting tool rather than Google Analytics. Each page you open records:</p>
+      <ul>
+        <li>the page address on this site</li>
+        <li>the website that linked you here, if any &mdash; only the site's name, never the full address, so search terms are never stored</li>
+        <li>your country</li>
+        <li>whether you are on a phone, tablet or computer</li>
+        <li>whether you opened one of the concept sites, tapped an email address, or sent the enquiry form</li>
+      </ul>
+      <p>That is the whole list. No name, no email address, no page-by-page trail, and nothing that identifies you personally.</p>
+    </div>
+
+    <div class="policy-block reveal">
+      <h2>Nothing is stored on your device</h2>
+      <p>There is no cookie, no local storage, and no identifier of any kind saved in your browser. Nothing about this visit stays behind when you close the tab. That is the reason there is no consent banner: consent is required for storing things on your device, and nothing is stored.</p>
+    </div>
+
+    <div class="policy-block reveal">
+      <h2>How visits are counted without identifying you</h2>
+      <p>To tell two visits apart without recognising a person, your IP address and browser description are combined with a secret that is generated fresh every night, and turned into a fingerprint that cannot be reversed. <b>Your IP address is never written down.</b> It exists for the fraction of a second it takes to do that sum, and there is no field in the database to store one.</p>
+      <p>Because last night's secret is deleted, the fingerprint your browser produces today is completely different from the one it produced yesterday. Two days of records cannot be joined together, by anyone, including Blueprint.</p>
+      <p>The honest trade-off: this means Blueprint genuinely cannot tell whether you have been here before, and there is no returning-visitor figure anywhere. That is the price of not needing a pop-up, and it is the right way round.</p>
+    </div>
+
+    <div class="policy-block reveal">
+      <h2>If you send the enquiry form</h2>
+      <p>The form asks for your name, business name, email address and your message, because a reply is impossible without them. It is delivered by Formspree, and the message goes to the email address above. Enquiries are kept for as long as there is a reason to keep them &mdash; an ongoing conversation, a live project, or a record of work done &mdash; and you can ask for yours to be deleted at any time.</p>
+    </div>
+
+    <div class="policy-block reveal">
+      <h2>How long anything is kept</h2>
+      <p>Visit records are deleted automatically after <b>13 months</b>, by a job that runs every night. That is a deletion that actually happens, not an intention.</p>
+    </div>
+
+    <div class="policy-block reveal">
+      <h2>Where it is processed, and by whom</h2>
+      <p>The site is served by GitHub Pages. Visit counting runs on Vercel in their London region and the records are stored on Neon, also in London &mdash; so this stays in the UK rather than being sent abroad. Enquiry form messages are handled by Formspree. Nothing is sold, shared, or used for advertising, and there is no third-party tracking on this site at all.</p>
+    </div>
+
+    <div class="policy-block reveal">
+      <h2>The legal basis</h2>
+      <p>Counting visits relies on legitimate interests: knowing which pages are read is necessary to run a small studio, and the way it is done here is about as unintrusive as measurement gets. Handling your enquiry is on the basis of taking steps at your request before entering into a contract.</p>
+      <p>If your browser sends a Global Privacy Control or Do Not Track signal, this site does not count your visit at all.</p>
+    </div>
+
+    <div class="policy-block reveal">
+      <h2>Your rights</h2>
+      <p>You can ask what is held about you, ask for it to be corrected or deleted, and object to it being held at all. Email the address above.</p>
+      <p>One honest limitation: because visit records cannot be traced back to a person by design, there is usually no way to find "your" rows in order to show or delete them. Anything you sent through the enquiry form can always be found and deleted, because that has your name on it.</p>
+      <p>If you are not satisfied with how this was handled, you can complain to the Information Commissioner's Office at <a href="https://ico.org.uk" rel="noopener">ico.org.uk</a>.</p>
+    </div>
+
+    <p class="note-line reveal">Last updated 3 August 2026.</p>
+
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Blueprint. — websites for local businesses</span><span>dougbridge8@gmail.com · <a href="privacy.html">Privacy</a> · © 2026</span></div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="main.js"></script>
+<script defer src="https://blueprint-stats.vercel.app/tracker.js" data-site="blueprint"></script>
+</body>
+</html>

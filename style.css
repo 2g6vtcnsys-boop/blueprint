@@ -173,7 +173,15 @@ footer{padding:34px 0 46px;color:#7f9bc0;font-family:'IBM Plex Mono';font-size:1
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
 /* ---- scroll-reveal base state ---- */
-.reveal{opacity:0;transform:translateY(30px)}
+/* Reveals hide ONLY once JS has proved it is running. The `js` class is set by
+   an inline script in <head>, before first paint — so content is never painted
+   visible and then snatched away, which is what a bottom-of-body script would
+   cause. With JS off, or if the GSAP CDN fails, the class is absent or removed
+   by the guard's failsafe and the content is simply there.
+   This previously read `.reveal{opacity:0}` with no `.js` prefix, which meant a
+   blocked CDN rendered a blank page — including the inquiry form, which carries
+   this class. A reveal must enhance an already-visible default, never gate it. */
+.js .reveal{opacity:0;transform:translateY(30px)}
 
 @media(max-width:900px){
   .nav-links{display:none}.cursor{display:none}.compass,.cross{display:none}

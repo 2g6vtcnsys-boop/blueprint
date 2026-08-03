@@ -305,6 +305,7 @@ if (fine && !reduce && document.getElementById('cursor')){
 if (reduce){
   /* ---- reduced-motion: settle everything into its final, static state ---- */
   gsap.set('.reveal', { opacity: 1, y: 0 });
+  clearTimeout(window.__revealGuard);   // reveals are handled; see note below
   gsap.set('.hero-h .char', { opacity: 1, x: 0, y: 0, rotation: 0 });
   gsap.set('.built', { opacity: 1 });
   const deepBg = document.querySelector('.deep-bg'), gridBg = document.querySelector('.grid-bg'), gridNight = document.querySelector('.grid-night');
@@ -329,6 +330,14 @@ if (reduce){
     if (el.closest('.hero') || el.closest('.page-hero')) return;
     gsap.to(el, { opacity: 1, y: 0, duration: .9, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 92%' } });
   });
+
+  /* Every reveal now has a tween that will show it, so cancel the head guard's
+     failsafe. This sits AFTER the wiring on purpose: anywhere earlier and a
+     missing GSAP could cancel the timer and *then* throw, leaving the page
+     hidden with nothing left to rescue it. Only the timer is cleared — the `js`
+     class stays, because removing it would strip opacity:0 from every
+     not-yet-triggered reveal and pop the whole page visible at once. */
+  clearTimeout(window.__revealGuard);
 
   /* ---- floating tick + rotating compass ---- */
   if (document.querySelector('[data-float]')) gsap.to('[data-float]', { y: -6, duration: 2.4, ease: 'sine.inOut', yoyo: true, repeat: -1 });

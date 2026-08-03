@@ -3,6 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>/* Reveal guard — must stay inline and in <head>. Adds `js` before first paint so
+   .js .reveal can hide without ever flashing visible content, and removes it again
+   if main.js never confirms it ran (GSAP CDN blocked, script error), so a failed
+   dependency degrades to a plain visible page instead of a blank one. main.js
+   clears this timer on success, so a slow connection never loses the animation. */
+(function(){var d=document.documentElement;d.classList.add('js');
+window.__revealGuard=setTimeout(function(){d.classList.remove('js');},3000);})();</script>
+
 <title>About — Blueprint website design</title>
 <meta name="description" content="One person, one project at a time. The person who designs your site is the person who answers your emails.">
 <link rel="canonical" href="https://blueprintwebsitedesign.co.uk/about.html">

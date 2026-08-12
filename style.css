@@ -4,7 +4,11 @@
    ========================================================================== */
 
 :root{
-  --paper:#EEF2F7;--paper-2:#E5ECF5;--ink:#0F2E57;--ink-soft:#5B7091;
+  /* --ink-soft carries nearly all the body copy. At #5B7091 it measured
+     4.48:1 on --paper — under AA by two hundredths, and 21px/400 is not
+     "large text" (that starts at 24px regular). #5B6F90 is the same hue two
+     steps darker and measures 4.53:1. */
+  --paper:#EEF2F7;--paper-2:#E5ECF5;--ink:#0F2E57;--ink-soft:#5B6F90;
   --line:#C7D8ED;--grid:#DBE5F3;
   --blue:#2F6BBF;--blue-dk:#1E4E96;--accent:#3E7BD6;--pale:#DCE8F7;
   --deep:#0B2545;--pale-2:#CFE0F7;--max:1180px;
@@ -78,6 +82,42 @@ body.night .brand-word-dark{display:block}
 .nav-cta{font-family:'IBM Plex Mono';font-size:13px;border:1px solid var(--ink);border-radius:100px;padding:10px 18px;transition:.3s;will-change:transform;white-space:nowrap}
 body.night .nav-links a.active{color:var(--pale-2)}
 
+/* ---- mobile menu ----
+   Below 900px .nav-links is hidden, and for a while nothing replaced it: on a
+   phone the homepage's only working links were the four concepts, Areas,
+   Privacy and the email address. Portfolio, Pricing and About were simply
+   unreachable — on the half of the traffic most likely to be standing outside
+   the shop.
+
+   It is a <details>/<summary> rather than a JS toggle, and that is deliberate.
+   The reveal guard exists so a blocked CDN degrades to a plain visible page;
+   it would be a poor trade if the only route to the pricing page were the one
+   control that needs JavaScript to open. <details> also brings the right
+   keyboard and ARIA behaviour for free. */
+.nav-menu{display:none;position:relative}
+.nav-burger{list-style:none;cursor:pointer;display:flex;flex-direction:column;justify-content:center;align-items:flex-end;gap:5px;width:44px;height:44px;padding:0 10px;margin-left:14px;border:1px solid var(--ink);border-radius:11px;transition:border-color .3s}
+.nav-burger::-webkit-details-marker{display:none}
+.nav-burger i{display:block;width:100%;height:1.5px;background:var(--ink);border-radius:2px;transition:transform .32s cubic-bezier(.22,.7,.28,1),opacity .2s}
+.nav-burger i:nth-child(2){width:64%}
+.nav-menu[open] .nav-burger i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-menu[open] .nav-burger i:nth-child(2){opacity:0}
+.nav-menu[open] .nav-burger i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.nav-panel{position:absolute;right:0;top:calc(100% + 14px);min-width:252px;list-style:none;padding:12px;border:1px solid var(--line);border-radius:16px;background:rgba(238,242,247,.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 34px 64px -32px rgba(15,46,87,.5)}
+/* the same corner ticks the portfolio thumbnails and the hero carry, so the
+   panel reads as part of the drafting motif rather than a generic dropdown */
+.nav-panel::before,.nav-panel::after{content:"";position:absolute;width:14px;height:14px;border:1px solid var(--blue);opacity:.5}
+.nav-panel::before{top:7px;left:7px;border-width:1px 0 0 1px}
+.nav-panel::after{bottom:7px;right:7px;border-width:0 1px 1px 0}
+.nav-panel a{display:flex;align-items:center;min-height:48px;padding:0 14px;border-radius:10px;font-size:16px;color:var(--ink);transition:background .25s,color .25s}
+.nav-panel a:hover{background:var(--pale)}
+.nav-panel a.active{color:var(--blue-dk);background:var(--pale)}
+body.night .nav-burger{border-color:var(--pale-2)}
+body.night .nav-burger i{background:var(--pale-2)}
+body.night .nav-panel{background:rgba(11,37,69,.95);border-color:#22528c}
+body.night .nav-panel::before,body.night .nav-panel::after{border-color:var(--pale-2)}
+body.night .nav-panel a{color:var(--pale-2)}
+body.night .nav-panel a:hover,body.night .nav-panel a.active{background:rgba(207,224,247,.14)}
+
 /* ---- hero ---- */
 .hero{min-height:100vh;display:flex;align-items:center;padding:150px 0 40px;position:relative}
 .hero .tick{font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.14em;color:var(--blue);border:1px solid var(--line);background:rgba(255,255,255,.55);border-radius:100px;padding:6px 14px;display:inline-block;margin-bottom:24px}
@@ -131,6 +171,10 @@ body.night .dim-readout{color:#9CC4FF}
 .built{position:absolute;inset:0;opacity:0;border-radius:12px;overflow:hidden;box-shadow:0 34px 80px -34px rgba(15,46,87,.5);background:#fff}
 .bt-nav{height:14%;background:var(--ink);display:flex;align-items:center;padding:0 5%;gap:6px}
 .bt-nav b{color:#fff;font-family:'Fraunces';font-size:1.3vw}.bt-nav .sp{flex:1}
+/* This slot used to read "Marlowe's" — the last invented business name on the
+   site. The illustration only needs to say "a name goes here", so it says it
+   with a scribble instead of borrowing a trading name nobody trades under. */
+.bt-name{height:40%;width:auto;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
 .bt-nav i{width:5%;height:20%;background:rgba(255,255,255,.4);border-radius:2px}
 .bt-hero{height:52%;display:flex;background:var(--pale)}
 .bt-copy{flex:1.1;padding:4.5%;display:flex;flex-direction:column;justify-content:center;gap:3%}
@@ -187,9 +231,17 @@ body.night .dim-readout{color:#9CC4FF}
 .contact a.mail{display:inline-block;margin-top:32px;font-family:'Fraunces';font-size:26px;color:#EAF1FB;border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:5px}
 .contact a.mail:hover{color:#9CC4FF;border-color:#9CC4FF}
 
-footer{padding:34px 0 46px;color:#7f9bc0;font-family:'IBM Plex Mono';font-size:13px;position:relative;z-index:2}
+/* #4E709E, not #7f9bc0: the old value measured 2.54:1 on --paper and failed AA
+   on every page — and this is the footer that carries the contact address and
+   the only links to Areas and Privacy. Same hue, darkened to 4.52:1. */
+footer{padding:34px 0 46px;color:#4E709E;font-family:'IBM Plex Mono';font-size:13px;position:relative;z-index:2}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-footer a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+footer a{color:inherit;text-decoration:underline;text-underline-offset:3px;position:relative}
+/* The footer links were 17px tall. This grows the touch target to 44px with an
+   invisible overlay rather than padding or inline-flex — both of those change
+   the line box, and these links sit inline between "·" separators where any
+   baseline shift shows immediately. */
+footer a::after{content:"";position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
 footer a:hover{color:var(--blue)}
 body.night footer a:hover{color:#9CC4FF}
 
@@ -221,10 +273,21 @@ body.night footer a:hover{color:#9CC4FF}
      apart on one line. */
   .brand-icon,.brand-word{height:30px}
   .nav-cta{font-size:11px;padding:9px 14px;margin-left:16px}
+  .nav-menu{display:block}
   .hwork{height:auto;overflow:visible;padding:40px 0}
   .hwork .lead-col{position:static;max-width:none;padding:0 40px;margin-bottom:30px}
   .htrack{flex-direction:column;gap:40px;padding:0 40px;transform:none!important}
   .panel{flex:none;width:100%}
+}
+
+/* The nav row is brand + CTA + burger below 900px, and on a 375px phone those
+   three plus the 40px wrap gutters need 406px — the burger fell off the right
+   edge. Only the nav gutter is tightened, not .wrap everywhere, so the page's
+   reading margin is unchanged. 347px at 375, so a 360px handset still fits. */
+@media(max-width:560px){
+  .nav .wrap{padding-left:20px;padding-right:20px}
+  .nav-cta{font-size:10.5px;padding:8px 12px;margin-left:10px}
+  .nav-burger{margin-left:10px}
 }
 
 /* ==========================================================================

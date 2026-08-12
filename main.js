@@ -339,6 +339,40 @@ if (reduce){
      not-yet-triggered reveal and pop the whole page visible at once. */
   clearTimeout(window.__revealGuard);
 
+  /* Second failsafe, for the case the first one is structurally blind to.
+     The head guard asks "did main.js run?". It cannot ask "is the animation
+     ticker actually ticking?" — and GSAP can load, wire every tween without
+     error, and still never render a frame, because its ticker is driven by
+     requestAnimationFrame. Where rAF is suspended (headless capture, preview
+     panes, some rendering crawlers) every tween sits at its start value, the
+     first failsafe has already been cancelled, and the page stays blank with a
+     clean console.
+
+     The two hero tweens above are plain delayed tweens with no ScrollTrigger,
+     so they resolve by ~1.6s wherever the visitor is on the page. If one is
+     still transparent well after that, the ticker is dead rather than merely
+     waiting. Only then drop `js`, which stops the CSS hiding anything.
+
+     That pops the whole page visible at once and forfeits the scroll reveals —
+     acceptable only because we have just proved they were never going to run.
+     Checking a tween that IS ScrollTrigger-driven would misread "correctly
+     still off-screen" as failure and break the reveals for everyone. */
+  setTimeout(() => {
+    const probe = document.querySelector('.hero .reveal, .page-hero .reveal');
+    if (!probe || parseFloat(getComputedStyle(probe).opacity) >= .5) return;
+
+    /* Dropping `js` alone is not enough, and this is the part that is easy to
+       get wrong: creating the tweens above makes GSAP write `opacity: 0` and a
+       transform INLINE on every .reveal, and an inline style beats the
+       stylesheet rule we just switched off. Nine of twelve elements stayed
+       invisible in testing with the class removed. So force the end state the
+       same way the reduced-motion branch does — gsap.set renders immediately
+       and needs no ticker, which is the whole point here. */
+    document.documentElement.classList.remove('js');
+    gsap.set('.reveal', { opacity: 1, y: 0 });
+    gsap.set('.hero-h .char', { opacity: 1, x: 0, y: 0, rotation: 0 });
+  }, 4000);
+
   /* ---- floating tick + rotating compass ---- */
   if (document.querySelector('[data-float]')) gsap.to('[data-float]', { y: -6, duration: 2.4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
   if (document.querySelector('.compass')) gsap.to('.compass', { rotation: 360, transformOrigin: '50% 50%', repeat: -1, duration: 60, ease: 'none' });

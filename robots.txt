@@ -1,10 +1,17 @@
 User-agent: *
 Allow: /
 
-# The concept mockups are demonstrations built around invented businesses.
-# They are deliberately kept out of search so that pages carrying fictional
-# trading names, registration numbers and phone numbers are never returned as
-# if they were real firms. Each one also carries its own noindex tag.
-Disallow: /work/
+# The concept mockups under /work/ are demonstrations built around invented
+# businesses, and must never be returned as if they were real firms. They are
+# kept out of search by a `noindex` tag on each page — NOT by a Disallow here.
+#
+# That distinction is load-bearing. A crawler told not to fetch a page never
+# reads the noindex on it, and a blocked URL that is publicly linked can still
+# be indexed on the strength of the link alone. Allowing the crawl is what lets
+# the noindex actually do its job.
+#
+# The tag lives in each project's source index.html, so it survives a rebuild.
+# If you ever move it back to the published copy only, restore the Disallow —
+# and know that it is the weaker of the two mechanisms.
 
 Sitemap: https://blueprintwebsitedesign.co.uk/sitemap.xml

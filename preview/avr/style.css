@@ -1,0 +1,507 @@
+/* AVR Innovations — "work in progress"
+   Motif: the middle state of a build. The van's double rule is the section label.
+   Palette taken from their own materials; no invented colours. */
+
+:root{
+  --paper:#F6F5F3;
+  --paper-2:#ECEBE8;
+  --ink:#1D2024;
+  --anthracite:#2E333A;
+  --anthracite-2:#23272D;
+  --slate:#59616C;          /* 5.71:1 on paper */
+  --line:#D8D6D1;
+  --line-dark:#3C424B;
+  /* The identity is achromatic. Their site board is a charcoal ground with white
+     lettering and a white double rule; the van is silver with black type. There is no
+     chromatic accent anywhere in it, so accents are carried by the darks. */
+  --mark:#1D2024;           /* the van's lettering — accents on light grounds */
+  --mark-lt:#A8B0BB;        /* 5.8:1 on anthracite — for dark grounds only */
+  --max:1240px;
+  --gut:28px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:'Instrument Sans',system-ui,-apple-system,sans-serif;
+  font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img{max-width:100%;display:block}
+/* NOTE: the width/height attributes on <img> apply as CSS presentational hints,
+   so the height hint silently beats any aspect-ratio you set. Wherever a rule
+   gives an <img> an aspect-ratio it must also say height:auto. Do NOT do this
+   globally via img[width][height] — at (0,2,1) that out-specifies single-class
+   rules like .feat-ph img and .hslide-media img and blows their cover sizing apart. */
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut);width:100%}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- type ---------- */
+.serif{font-family:'Bodoni Moda',Georgia,serif;font-optical-sizing:auto}
+h1,h2,h3,.serif{font-family:'Bodoni Moda',Georgia,serif;font-weight:500;line-height:1.08;letter-spacing:-.012em;font-optical-sizing:auto}
+h1{font-size:clamp(38px,6.2vw,76px)}
+h2{font-size:clamp(28px,4vw,46px)}
+h3{font-size:20px;line-height:1.22}
+em.em{font-style:italic}   /* achromatic: the italic serif is the emphasis, not a colour */
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+
+/* the van's double rule — the site's one motif */
+.seclabel{display:inline-flex;flex-direction:column;gap:6px;color:var(--slate);margin-bottom:20px}
+.seclabel .bar{height:1px;background:currentColor;opacity:.45}
+.seclabel span{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;
+  letter-spacing:.28em;text-transform:uppercase;padding-left:.28em;white-space:nowrap}
+.on-dark .seclabel{color:#A8B0BB}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;
+  padding:14px 24px;border:1px solid transparent;transition:background .18s,color .18s,border-color .18s;cursor:pointer}
+.btn-fill{background:var(--mark);color:#fff}          /* 4.75:1 shape on paper, 5.0:1 label */
+.btn-fill:hover{background:#383E46}
+.btn-line{border-color:var(--ink);color:var(--ink)}
+.btn-line:hover{background:var(--ink);color:var(--paper)}
+/* The primary fill is near-black, so on any dark ground it converges with the ground
+   and fails WCAG 1.4.11 as a SHAPE even while its label reads fine. On every dark
+   ground the button therefore inverts to the paper fill. This was already true of the
+   old cedar accent, which measured 2.9:1 here and got worse, not better, when the
+   scrim was darkened — a mid-tone converges with a dark ground from the other side. */
+.on-dark .btn-line{border-color:#AEB6C1;color:#EDE9E2}
+.on-dark .btn-line:hover{background:#EDE9E2;color:var(--anthracite)}
+.btn:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--mark);outline-offset:3px}
+/* --mark is near-black, so on the dark grounds the ring has to invert or it vanishes. */
+.on-dark :focus-visible,.hslide :focus-visible,.nav.over :focus-visible{outline-color:#EDE9E2}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:60;background:rgba(246,245,243,.94);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+  transition:background .3s ease,border-color .3s ease}
+/* Over the hero sequence the nav floats on the photograph. Its own gradient is the
+   backdrop the type is measured against — the slide scrim is only .22 up here. */
+.nav.over{background-color:transparent;
+  background-image:linear-gradient(180deg,rgba(20,23,27,.62) 0%,rgba(20,23,27,.28) 62%,rgba(20,23,27,0) 100%);
+  backdrop-filter:none;border-bottom-color:transparent}
+.nav.over .brand,.nav.over .nav-tel{color:#F1EEE9}
+.nav.over .brand .tag{color:#DFE4EA}
+.nav.over .menu a{color:#DDE2E8}
+.nav.over .menu a:hover,.nav.over .menu a[aria-current=page]{color:#fff}
+.nav.over .burger>summary i{background:#F1EEE9}
+/* Over the photographs the CTA inverts to the paper fill, exactly as the hero's own
+   primary does. The previous accent was a mid-tone and needed a hairline to hold its
+   edge (1.44:1 as a shape over the brightest slide); a paper fill needs no such help
+   and makes the two primary buttons on screen match instead of differ. */
+.nav.over .nav-act .btn-fill{background:var(--paper);border-color:var(--paper);color:var(--ink)}
+.nav.over .nav-act .btn-fill:hover{background:#E4E2DE;border-color:#E4E2DE}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:18px;
+  max-width:var(--max);margin:0 auto;padding:14px var(--gut)}
+.brand{display:inline-flex;flex-direction:column;gap:5px;color:var(--ink);flex-shrink:0}
+.brand .bar{height:1px;background:currentColor;opacity:.42}
+.brand .name{font-family:'Bodoni Moda',Georgia,serif;font-weight:500;font-variant:small-caps;
+  font-size:19px;letter-spacing:.02em;line-height:1;
+  /* low optical size keeps the didone hairlines from shattering at nav size */
+  font-variation-settings:'opsz' 11}
+.brand .tag{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:8px;letter-spacing:.34em;
+  text-transform:uppercase;padding-left:.34em;color:var(--slate);line-height:1}
+.menu{display:flex;gap:26px;list-style:none;align-items:center}
+.menu a{font-size:15px;color:var(--slate);font-weight:500;padding:3px 0;position:relative}
+.menu a:hover,.menu a[aria-current=page]{color:var(--ink)}
+.menu a[aria-current=page]::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--mark)}
+.nav-act{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.nav-tel{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:14px;color:var(--ink);font-weight:500;white-space:nowrap}
+.nav-tel:hover{color:var(--mark)}
+.nav-act .btn{padding:11px 18px;font-size:14px}
+.burger{display:none}
+
+/* ---------- hero: a Swiper carousel ----------
+   Snaps one slide per gesture over 500ms; it is NOT scroll-linked. The minimal Swiper
+   layout CSS is inlined here rather than pulled from a second CDN file, so a blocked
+   stylesheet can't leave the slides unstyled while the script still runs. */
+/* padding:0 is load-bearing: .hero-seq is a <section>, so the generic
+   section{padding:clamp(56px,7vw,92px) 0} applies and Swiper then measures the slide
+   height as (container - 2x padding) — 682px instead of 860px at 1280 wide. */
+.hero-seq{position:relative;height:100svh;min-height:420px;overflow:hidden;padding:0;
+  margin-top:calc(-1 * var(--navh, 0px));background:var(--anthracite-2)}
+/* If Swiper never initialises (CDN blocked), show one slide and let the page scroll. */
+.hero-seq:not(.swiper-initialized) .swiper-wrapper{display:block;height:auto}
+.hero-seq:not(.swiper-initialized) .swiper-slide{height:100svh;min-height:420px}
+.hero-seq:not(.swiper-initialized) .swiper-slide ~ .swiper-slide{display:none}
+.hero-seq .swiper-wrapper{display:flex;flex-direction:column;height:100%;width:100%;
+  box-sizing:content-box;transition-property:transform;transition-timing-function:ease}
+.hero-seq .swiper-slide{flex-shrink:0;width:100%;height:100%;position:relative}
+.hslide{display:flex;align-items:flex-end;overflow:hidden;color:#EDE9E2}
+.hslide-media{position:absolute;inset:0;will-change:transform}
+.hslide-media img{width:100%;height:100%;object-fit:cover;display:block;
+  object-position:var(--op,50% 50%)}  /* --op is set per slide on .hslide-media */
+/* The scrim is two bands with a clear middle, not a wash over the whole photograph.
+   The type is bottom-anchored (.hslide{align-items:flex-end}), so only the bottom needs
+   darkening; the old gradient was already .76 opaque by 42% down and greyed the subject
+   of every slide for nothing.
+
+   THE TOP BAND IS LOAD-BEARING — do not take it to zero. .nav.over's own gradient was
+   measured with the old scrim's .22 underneath it: .62 over .22 composites to ~.70. On
+   its own over the barn's blue sky or the canopy's white glazed roof the nav backdrop
+   falls to .62 and the nav type goes under. A short band confined to the nav strip
+   holds it slightly better than before while still clearing the body of the frame. */
+.hslide::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(20,23,27,.34) 0%,rgba(20,23,27,0) 20%,
+    rgba(20,23,27,0) 40%,rgba(20,23,27,.66) 70%,rgba(20,23,27,.86) 100%)}
+/* Slide 1 carries the h1, lead and both CTAs, so its type starts far higher up the
+   frame than the one-line titles on the rest. Its ramp starts earlier to match. */
+.hslide:first-child::after{background:linear-gradient(180deg,rgba(20,23,27,.34) 0%,
+  rgba(20,23,27,0) 20%,rgba(20,23,27,0) 28%,rgba(20,23,27,.55) 62%,
+  rgba(20,23,27,.84) 100%)}
+.hslide-in{position:relative;z-index:2;width:100%;padding:150px var(--gut) 92px;
+  will-change:transform}
+.hslide h1{max-width:15ch;text-shadow:0 1px 26px rgba(15,17,20,.5)}
+.hslide h1 em{font-style:italic;color:inherit}
+.hslide p.lead{font-size:clamp(17px,2vw,20px);max-width:46ch;margin-top:20px;color:#DFDCD6;
+  text-shadow:0 1px 18px rgba(15,17,20,.55)}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.hslide .btn-fill{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.hslide .btn-fill:hover{background:#E4DDD1;border-color:#E4DDD1;color:var(--ink)}
+.hslide .btn-line{border-color:#AEB6C1;color:#EDE9E2}
+.hslide .btn-line:hover{background:#EDE9E2;color:var(--anthracite)}
+.hslide-eyebrow{display:block;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;
+  letter-spacing:.26em;text-transform:uppercase;color:#EDE9E2;margin-bottom:14px;
+  text-shadow:0 1px 14px rgba(15,17,20,.6)}
+.hslide-title{font-family:'Bodoni Moda',Georgia,serif;font-weight:500;line-height:1.06;
+  letter-spacing:-.012em;font-size:clamp(34px,5.4vw,66px);max-width:14ch;
+  text-shadow:0 1px 26px rgba(15,17,20,.5)}
+
+/* fixed chrome over the run */
+.hero-fixed{position:fixed;left:0;right:0;bottom:0;z-index:40;pointer-events:none;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:0 var(--gut) 26px;transition:opacity .45s ease;color:#EDE9E2}
+.hero-fixed.gone{opacity:0}
+.hero-fixed a{pointer-events:auto}
+.hf-tel{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:13px;font-weight:500;
+  text-shadow:0 1px 14px rgba(15,17,20,.7)}
+.hf-tel:hover{color:#fff}
+.hf-count{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.14em;
+  display:flex;gap:6px;align-items:baseline;text-shadow:0 1px 14px rgba(15,17,20,.7)}
+.hf-count b{color:#fff;font-weight:500}
+.hf-count i{font-style:normal;opacity:.5}
+.hf-count span{opacity:.72}
+.hf-hint{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.24em;
+  text-transform:uppercase;color:#CCD2DA;text-shadow:0 1px 14px rgba(15,17,20,.7)}
+
+/* ---------- trust strip ---------- */
+.trust{background:var(--anthracite);color:#DDE1E7;border-bottom:1px solid var(--line-dark)}
+.trust ul{max-width:var(--max);margin:0 auto;padding:16px var(--gut);display:flex;flex-wrap:wrap;
+  gap:10px 34px;list-style:none;font-size:14px}
+.trust li{display:flex;align-items:center;gap:9px}
+.trust li::before{content:'';width:5px;height:5px;background:var(--mark-lt);flex-shrink:0}
+
+/* ---------- generic section ---------- */
+section{padding:clamp(56px,7vw,92px) 0}
+.on-dark{background:var(--anthracite);color:#E4E8ED}
+.on-dark h2{color:#F1EEE9}
+.head{max-width:56ch;margin-bottom:38px}
+.head p{color:var(--slate);font-size:17px;margin-top:14px}
+.on-dark .head p{color:#B9C0C9}
+
+/* ---------- stages 01–04 ---------- */
+.stages{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.on-dark .stages{background:var(--line-dark);border-color:var(--line-dark)}
+.stages > div{background:var(--paper);padding:24px 22px 26px}
+.on-dark .stages > div{background:var(--anthracite)}
+.stages b{display:block;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;
+  letter-spacing:.1em;color:var(--mark);margin-bottom:9px}
+.on-dark .stages b{color:var(--mark-lt)}
+.stages h3{margin-bottom:7px}
+.stages p{font-size:14.5px;color:var(--slate)}
+.on-dark .stages p{color:#AEB6C1}
+
+/* ---------- the middle of the job ---------- */
+.mid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-dark);
+  border:1px solid var(--line-dark)}
+.mid figure{margin:0;background:var(--anthracite-2);display:flex;flex-direction:column}
+.mid img{aspect-ratio:3/4;object-fit:cover;width:100%;height:auto}
+.mid figcaption{padding:14px 15px 17px}
+.mid .k{display:block;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:9.5px;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--mark-lt);margin-bottom:6px}
+.mid p{font-size:13.5px;color:#B9C0C9;line-height:1.5}
+/* Light-ground variant. --mark-lt only works on the anthracite; on paper it is 2.16:1. */
+.mid.mid-light{background:var(--line);border-color:var(--line)}
+.mid.mid-light figure{background:var(--paper)}
+.mid.mid-light .k{color:var(--slate)}
+.mid.mid-light p{color:var(--slate)}
+
+/* ---------- services ---------- */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.svc{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--paper);
+  transition:border-color .2s,transform .2s}
+.svc:hover{border-color:var(--mark);transform:translateY(-2px)}
+.svc .ph{display:block;position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--paper-2)}
+.svc .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.svc:hover .ph img{transform:scale(1.03)}
+.svc .stamp{position:absolute;left:0;bottom:0;background:var(--anthracite);color:#E4E8ED;
+  font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.18em;
+  text-transform:uppercase;padding:6px 11px}
+.svc .stamp.mid{background:var(--mark);color:#fff}
+.svc-b{padding:20px 21px 24px;display:flex;flex-direction:column;flex:1}
+.svc-b p{font-size:14.5px;color:var(--slate);margin:8px 0 16px;flex:1}
+.svc-b .more{font-size:13.5px;font-weight:600;color:var(--mark)}
+
+/* ---------- featured project ---------- */
+.feat{display:grid;grid-template-columns:1.15fr .85fr;gap:0;border:1px solid var(--line-dark)}
+.feat-ph{position:relative;min-height:420px;background:var(--anthracite-2)}
+.feat-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.feat-b{padding:clamp(28px,3.4vw,46px);display:flex;flex-direction:column;justify-content:center;
+  background:var(--anthracite-2)}
+.feat-b h2{margin:0 0 16px}
+.feat-b p{color:#B9C0C9;font-size:16px}
+.spec{list-style:none;margin:26px 0 0;border-top:1px solid var(--line-dark)}
+.spec li{display:flex;justify-content:space-between;gap:18px;padding:11px 0;
+  border-bottom:1px solid var(--line-dark);font-size:14px}
+.spec dt,.spec .k{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:#98A1AD;padding-top:2px}
+.spec .v{text-align:right;color:#E4E8ED}
+/* the three-state strip */
+.triptych{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-dark);
+  border:1px solid var(--line-dark);border-top:0}
+.triptych figure{position:relative;background:var(--anthracite-2);margin:0}
+.triptych img{aspect-ratio:3/2;object-fit:cover;width:100%;height:auto}
+.triptych figcaption{padding:11px 13px 14px;font-size:13px;color:#B9C0C9}
+.triptych .k{display:block;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:9.5px;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--mark-lt);margin-bottom:5px}
+
+/* ---------- work grid ---------- */
+.work{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.work figure{margin:0}
+.work .ph{display:block;aspect-ratio:4/3;overflow:hidden;background:var(--paper-2);border:1px solid var(--line)}
+.work .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.work figure:hover .ph img{transform:scale(1.03)}
+.work figcaption{padding-top:12px}
+.work .k{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--mark);display:block;margin-bottom:6px}
+.work h3{font-size:18px;margin-bottom:5px}
+.work p{font-size:14px;color:var(--slate)}
+
+/* ---------- team ---------- */
+.team{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,4vw,60px);align-items:center}
+.team-ph{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:12px}
+.team-ph figure{margin:0}
+.team-ph img{aspect-ratio:1;object-fit:cover;width:100%;height:auto;border:1px solid var(--line)}
+/* Portrait sources square-cropped from the centre lose the subject's head. */
+.team-ph img.tall{object-position:50% 22%}
+.team-ph figure:first-child{grid-column:1/-1}
+.team-ph figure:first-child img{aspect-ratio:16/9;height:auto}
+.team-ph figcaption{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--slate);padding-top:7px}
+.team-b p{color:var(--slate);font-size:16.5px;margin-top:16px;max-width:52ch}
+.team-b p strong{color:var(--ink);font-weight:600}
+
+/* ---------- cta ---------- */
+.cta{background:var(--paper-2);border-top:1px solid var(--line);text-align:center}
+.cta h2{max-width:18ch;margin:0 auto 16px}
+.cta p{color:var(--slate);max-width:52ch;margin:0 auto;font-size:17px}
+.cta .hero-cta{justify-content:center;margin-top:28px}
+
+/* ---------- footer ---------- */
+footer{background:var(--anthracite-2);color:#B9C0C9;padding:clamp(44px,5vw,66px) 0 28px;font-size:14.5px}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:34px}
+footer h4{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:#8D96A3;margin-bottom:14px;font-weight:500}
+footer ul{list-style:none}
+footer li{margin-bottom:8px}
+footer a:hover{color:#F1EEE9}
+footer .brand{color:#EDE9E2;margin-bottom:14px}
+footer .brand .tag{color:#8D96A3}
+.foot-note{max-width:34ch;font-size:14px}
+.foot-bar{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  border-top:1px solid var(--line-dark);margin-top:38px;padding-top:20px;font-size:13px;color:#8B95A2}
+
+/* ---------- responsive ---------- */
+@media(max-width:1000px){
+  .svc-grid,.work,.mid{grid-template-columns:repeat(2,1fr)}
+  .feat{grid-template-columns:1fr}
+  .feat-ph{min-height:300px}
+  .foot{grid-template-columns:1fr 1fr}
+  .stages{grid-template-columns:1fr 1fr}
+}
+@media(max-width:820px){
+  .menu,.nav-act .btn{display:none}
+  .burger{display:block}
+  .team{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  :root{--gut:16px}
+  .svc-grid,.work,.triptych{grid-template-columns:1fr}
+  .mid{grid-template-columns:1fr 1fr}
+  .stages{grid-template-columns:1fr}
+  .foot{grid-template-columns:1fr}
+  .hslide-in{padding:104px var(--gut) 84px}
+  /* On a phone the text block is much taller relative to the frame, so the ramp has to
+     start higher. Still leaves the top third of every photograph clear. */
+  .hslide::after{background:linear-gradient(180deg,rgba(20,23,27,.34) 0%,
+    rgba(20,23,27,0) 22%,rgba(20,23,27,0) 46%,rgba(20,23,27,.70) 80%,
+    rgba(20,23,27,.88) 100%)}
+  .hslide:first-child::after{background:linear-gradient(180deg,rgba(20,23,27,.34) 0%,
+    rgba(20,23,27,0) 22%,rgba(20,23,27,0) 30%,rgba(20,23,27,.58) 66%,
+    rgba(20,23,27,.86) 100%)}
+  .nav-tel{font-size:13px}
+  .brand .name{font-size:17px}
+  .triptych{border-top:1px solid var(--line-dark)}
+}
+
+/* ---------- mobile menu: a <details> disclosure, deliberately not JS.
+   The reveal guard degrades to a plain page when the CDN is blocked; it would be a
+   poor trade if the only route to the services pages needed JavaScript to open. ---------- */
+.burger{list-style:none}
+.burger>summary{list-style:none;display:flex;flex-direction:column;justify-content:center;gap:5px;
+  width:42px;height:38px;cursor:pointer;padding:0 8px}
+.burger>summary::-webkit-details-marker{display:none}
+.burger>summary i{display:block;height:1.5px;background:var(--ink);transition:.2s}
+.burger[open]>summary i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.burger[open]>summary i:nth-child(2){opacity:0}
+.burger[open]>summary i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.burger .panel{position:absolute;left:0;right:0;top:100%;background:var(--paper);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:8px var(--gut) 20px}
+.burger .panel a{display:block;padding:13px 0;border-bottom:1px solid var(--line);font-size:17px}
+.burger .panel a:last-of-type{border-bottom:0}
+.burger .panel .btn{margin-top:14px;width:100%;justify-content:center}
+
+/* ---------- scroll reveals, guarded ----------
+   .js is added by an inline <head> script and removed by a 3s failsafe, so a blocked
+   CDN or disabled JS renders a complete page instead of a blank one. */
+.js .rv{opacity:0;transform:translateY(16px)}
+.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.22,.7,.3,1)}
+@media (prefers-reduced-motion:reduce){
+  /* Swiper is never initialised (see main.js): show the first slide, nothing moves,
+     and the page scrolls straight past it. */
+  .hero-seq{height:auto;min-height:0}
+  .hero-seq .swiper-wrapper{display:block;height:auto}
+  .hero-seq .swiper-slide{height:clamp(560px,86vh,860px)}
+  .hero-seq .swiper-slide ~ .swiper-slide{display:none}
+  .hslide-media,.hslide-in{transform:none !important}
+  .js .rv{opacity:1;transform:none}
+  .svc .ph img,.work figure:hover .ph img{transition:none;transform:none}
+}
+
+/* ======================================================================
+   INNER PAGES
+   Deliberately their own class names. Home's narrative sections (.hero,
+   .feat, .mid) carry styling baked in for their place in the scroll story;
+   reusing those names here would pull the wrong styling in silently.
+   ====================================================================== */
+
+/* ---------- page hero ---------- */
+.page-hero{position:relative;background:var(--anthracite-2);color:#EDE9E2;overflow:hidden;
+  display:flex;align-items:flex-end;min-height:clamp(390px,56vh,560px)}
+.page-hero .ph-img{position:absolute;inset:0}
+.page-hero .ph-img img{width:100%;height:100%;object-fit:cover}
+/* Was a near-flat .70/.58/.90, which buried the photograph on every inner page while
+   still leaving the 10.5px label short against blown-out sky. Measured text bands:
+   label 44-51%, h1 56-75%, lead 79-92%. So: light over the top third so the picture
+   reads, then heavy from 42% down where the type actually sits. */
+.page-hero::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(23,26,30,.22) 0%,rgba(23,26,30,.36) 26%,
+    rgba(23,26,30,.76) 42%,rgba(23,26,30,.92) 100%)}
+.ph-in{position:relative;z-index:2;padding:120px 0 38px}
+/* Same call as .hslide-eyebrow: a small mono label over a photograph is the hardest
+   thing on the page to read, so it carries the near-white tone rather than the dimmed
+   one. At #CCD2DA this measured 4.49 over the extensions hero — under AA by a hair. */
+.page-hero .seclabel{color:#EDE9E2}
+.page-hero h1{font-size:clamp(34px,5.2vw,60px);max-width:17ch;
+  text-shadow:0 1px 24px rgba(15,17,20,.5)}
+.page-hero .lead{font-size:clamp(16.5px,1.9vw,19px);max-width:52ch;margin-top:16px;color:#DFDCD6;
+  text-shadow:0 1px 16px rgba(15,17,20,.55)}
+
+/* ---------- prose ---------- */
+.prose{max-width:66ch}
+.prose h2{margin:0 0 16px}
+.prose h3{font-size:22px;margin:32px 0 9px}
+.prose p{color:var(--slate);margin-bottom:16px}
+.prose p.first{font-size:18.5px;color:var(--ink)}
+.prose ul{margin:0 0 18px 0;padding:0;list-style:none}
+.prose ul li{position:relative;padding-left:20px;margin-bottom:8px;color:var(--slate)}
+.prose ul li::before{content:'';position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--slate)}
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,4.4vw,64px);align-items:start}
+.split.flip > *:first-child{order:2}
+.split-ph img{width:100%;border:1px solid var(--line)}
+.split-ph figcaption{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--slate);padding-top:9px}
+.split-ph figure{margin:0}
+.split-ph figure + figure{margin-top:16px}
+
+/* ---------- spec table ---------- */
+.spec-table{width:100%;border-top:1px solid var(--line);margin-top:8px}
+.spec-table div{display:flex;justify-content:space-between;gap:20px;padding:12px 0;
+  border-bottom:1px solid var(--line);font-size:15px}
+.spec-table dt,.spec-table .k{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--slate);padding-top:3px;flex-shrink:0}
+.spec-table .v{text-align:right}
+/* --slate is a light-ground token: on the anthracite it measured 2.03:1. */
+.on-dark .spec-table{border-top-color:var(--line-dark)}
+.on-dark .spec-table div{border-bottom-color:var(--line-dark)}
+.on-dark .spec-table .k{color:#A3ACB8}
+.on-dark .spec-table .v{color:#E4E8ED}
+.on-dark .prose h3,.on-dark .prose h2{color:#F1EEE9}
+.on-dark .prose p,.on-dark .prose ul li{color:#B9C0C9}
+.on-dark .prose ul li::before{background:var(--mark-lt)}
+
+/* ---------- project grid ---------- */
+.pj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.pj{margin:0;border:1px solid var(--line);background:var(--paper);display:flex;flex-direction:column;
+  transition:border-color .2s}
+.pj:hover{border-color:var(--mark)}
+.pj .ph{display:block;aspect-ratio:4/3;overflow:hidden;background:var(--paper-2)}
+.pj .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.pj:hover .ph img{transform:scale(1.03)}
+.pj figcaption{padding:17px 18px 20px;display:flex;flex-direction:column;flex:1}
+.pj .k{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--mark);display:block;margin-bottom:7px}
+.pj h3{font-size:18px;margin-bottom:6px}
+.pj p{font-size:14px;color:var(--slate)}
+.pj .where{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--slate);margin-top:11px;padding-top:9px;
+  border-top:1px solid var(--line)}
+
+/* ---------- filter chips (no JS: plain anchors to sections) ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:34px}
+.chips a{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;padding:8px 13px;border:1px solid var(--line);color:var(--slate);
+  transition:.18s}
+.chips a:hover{border-color:var(--mark);color:var(--mark)}
+
+/* ---------- contact ---------- */
+.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(30px,4.4vw,60px);align-items:start}
+.field{margin-bottom:17px}
+.field label{display:block;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--slate);margin-bottom:7px}
+.field input,.field textarea,.field select{width:100%;padding:13px 14px;border:1px solid var(--line);
+  background:#FFFDFA;font:inherit;font-size:15.5px;color:var(--ink);border-radius:0}
+.field input:focus,.field textarea:focus,.field select:focus{outline:2px solid var(--mark);outline-offset:1px;border-color:var(--mark)}
+.field textarea{min-height:130px;resize:vertical}
+.form-note{font-size:13px;color:var(--slate);margin-top:13px}
+.form-msg{display:none;margin-top:16px;padding:14px 16px;border:1px solid var(--slate);
+  background:#F6ECE3;font-size:14.5px;color:var(--ink)}
+.form-msg.show{display:block}
+.contact-card{background:var(--paper-2);border:1px solid var(--line);padding:26px 24px}
+.contact-card h3{font-size:19px;margin-bottom:4px}
+.contact-card dl{margin:0}
+.contact-card .row{padding:13px 0;border-bottom:1px solid var(--line)}
+.contact-card .row:last-child{border-bottom:0}
+.contact-card .k{display:block;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--slate);margin-bottom:5px}
+.contact-card .v{font-size:16px}
+.contact-card .v a:hover{color:var(--mark)}
+
+/* footer brand lockup (matches the nav) */
+.foot-brand{display:inline-flex;flex-direction:column;gap:5px;color:#EDE9E2;margin-bottom:14px}
+.foot-brand .name{font-family:'Bodoni Moda',Georgia,serif;font-weight:500;font-variant:small-caps;
+  font-size:19px;letter-spacing:.02em;line-height:1;font-variation-settings:'opsz' 11}
+.foot-brand .bar{height:1px;background:currentColor;opacity:.42}
+.foot-brand .tag{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:8px;letter-spacing:.34em;
+  text-transform:uppercase;padding-left:.34em;color:#8D96A3;line-height:1}
+
+@media(max-width:1000px){
+  .pj-grid{grid-template-columns:repeat(2,1fr)}
+  .split,.contact-grid{grid-template-columns:1fr}
+  .split.flip > *:first-child{order:0}
+}
+@media(max-width:620px){
+  .pj-grid{grid-template-columns:1fr}
+  .ph-in{padding:96px 0 30px}
+}

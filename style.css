@@ -400,6 +400,23 @@ form>div{margin-bottom:18px}
 .bio p{margin-bottom:14px;color:var(--ink-soft)}
 .bio p b{color:var(--ink)}
 .mockcard{position:relative;border-radius:12px;overflow:hidden;box-shadow:0 34px 80px -34px rgba(15,46,87,.5);background:#fff;aspect-ratio:16/11}
+/* the headshot, framed like a drawing: corner ticks plus dimension lines
+   (name along the bottom, Richmond's coordinates up the side) */
+.portrait{position:relative;margin:0;justify-self:center;width:100%;max-width:400px;padding:0 46px 46px 0}
+.portrait img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
+.portrait .tk{position:absolute;width:18px;height:18px;border:0 solid var(--blue)}
+.portrait .tl{top:-9px;left:-9px;border-top-width:1.5px;border-left-width:1.5px}
+.portrait .tr{top:-9px;right:37px;border-top-width:1.5px;border-right-width:1.5px}
+.portrait .bl{bottom:37px;left:-9px;border-bottom-width:1.5px;border-left-width:1.5px}
+.portrait .br{bottom:37px;right:37px;border-bottom-width:1.5px;border-right-width:1.5px}
+.portrait .dim{position:absolute;font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.14em;color:var(--blue-dk)}
+.portrait .dim::before{content:"";position:absolute;background:var(--blue);opacity:.6}
+.portrait .dim>span{position:relative;background:var(--paper);padding:0 8px}
+.portrait .dim-b{left:0;right:46px;bottom:12px;height:14px;line-height:14px;text-align:center;border-left:1.5px solid var(--blue);border-right:1.5px solid var(--blue)}
+.portrait .dim-b::before{left:0;right:0;top:50%;height:1px}
+.portrait .dim-r{top:0;bottom:46px;right:12px;width:14px;display:flex;align-items:center;justify-content:center;border-top:1.5px solid var(--blue);border-bottom:1.5px solid var(--blue)}
+.portrait .dim-r::before{top:0;bottom:0;left:50%;width:1px}
+.portrait .dim-r>span{writing-mode:vertical-rl;padding:8px 0}
 
 .principles{padding:30px 0 100px;position:relative}
 .principle-grid{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-top:50px}
@@ -419,6 +436,7 @@ form>div{margin-bottom:18px}
   .tier-grid{grid-template-columns:1fr}
   .inquiry-grid{grid-template-columns:1fr;gap:40px}
   .bio-grid{grid-template-columns:1fr;gap:36px}
+  .portrait{max-width:340px}
   .form-row{grid-template-columns:1fr}
 }
 
